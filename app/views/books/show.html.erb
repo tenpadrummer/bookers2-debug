@@ -45,6 +45,31 @@
           <% end %>
         </tr>
       </table>
+      <% if @book.book_comments.present? %>
+        <table>
+          <tbody>
+            <% @book.book_comments.each do |book_comment| %>
+              <td>
+                <%= link_to book_comment.user do %>
+                  <%= image_tag book_comment.user.get_profile_image, size:"50x50" %>
+                  <%= book_comment.user.name %>
+                <% end %>
+                <%= book_comment.comment %>
+                <% if book_comment.user_id == current_user.id %>
+                  <%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-danger" %>
+                <% end %>
+              </td>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      <div>
+       コメント数：<%= @book.book_comments.count %>
+      </div>
+      <%= form_with model: [@book, @book_comment], url: book_book_comments_path(@book),local: false do |f| %>
+        <%= f.text_area :comment, class: 'form-control book_book_comment', rows: '5' %>
+        <%= f.submit "送信" %>
+      <% end %>
     </div>
   </div>
 </div>
