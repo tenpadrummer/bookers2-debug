@@ -38,4 +38,24 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  # ユーザーの検索
+  def self.search(keyword, match_label)
+    case match_label
+    when "1"
+      search_params = "#{keyword}%"
+    when "2"
+      search_params ="%#{keyword}"
+    when "3"
+      search_params = "#{keyword}"
+    when "4"
+      search_params = "%#{keyword}%"
+    end
+
+    if keyword.present?
+      User.where("name LIKE?","#{search_params}")
+    else
+      User.all
+    end
+  end
 end
