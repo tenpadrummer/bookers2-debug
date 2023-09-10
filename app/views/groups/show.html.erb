@@ -1,0 +1,30 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <%= render 'users/info',user: current_user %>
+      <h2 class="mt-3">New Book</h2>
+      <%= render 'books/form', book: @new_book %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>Group Info</h2>
+  		<table class='table'>
+  		  <tr>
+          <td><%= link_to(@group) do %>
+            <%= image_tag @group.get_image, size:"50x50" %>
+            <% end %>
+          </td>
+          <td><%= link_to @group.name, @group %></td>
+          <td><%= @group.introduction %></td>
+          <% if @group.owner_id == current_user.id %>
+            <td><%= link_to 'Edit',edit_group_path(@group.id), class: "btn btn-sm btn-success" %></td>
+          <% elsif @group.users.include?(current_user) %>
+            <td> <%= link_to 'Leave this group', leave_group_path(@group) ,method: :delete, class: "btn btn-sm btn-danger" %></td>
+          <% else %>
+            <td><%= link_to 'Join this group', join_group_path(@group), class: "btn btn-sm btn-success" %></td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

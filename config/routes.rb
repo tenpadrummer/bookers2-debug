@@ -22,7 +22,12 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  resources :groups, only: [:index,:show,:new,:create,:edit,:update]
+  resources :groups, only: [:index,:show,:new,:create,:edit,:update] do
+    member do
+      get "join", to: "groups#join"
+      delete "leave", to: "groups#leave"
+    end
+  end
 
   get 'search' => "searches#search"
 end

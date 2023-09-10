@@ -6,6 +6,11 @@ class GroupsController < ApplicationController
     @book = Book.new
   end
 
+  def show
+    @group = Group.find(params[:id])
+    @new_book = Book.new
+  end
+
   def new
     @group = Group.new
   end
@@ -31,6 +36,18 @@ class GroupsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def join
+    @group = Group.find(params[:id])
+    @group.users << current_user
+    redirect_to  groups_path
+  end
+
+  def leave
+    @group = Group.find(params[:id])
+    @group.users.delete(current_user)
+    redirect_to groups_path
   end
 
   private
