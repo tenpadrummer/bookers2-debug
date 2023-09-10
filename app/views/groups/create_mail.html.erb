@@ -1,0 +1,19 @@
+<div class="container">
+  <h3 class="margin_top text-center">送信が完了しました</h3>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <div class="margin_top">内容は以下の通りです。</div>
+      <div class="small_margin_top">
+        [タイトル]
+        <p class="font-weight-bold"> <%= @title %></p>
+      </div>
+      <div>
+        [本文]
+        <p class="font-weight-bold"> <%= safe_join(@content.split("\n"),tag(:br)) %></p>
+      </div>
+      <div class="text-center">
+        <%= link_to 'Group一覧へ戻る',groups_path %>
+      </div>
+    </div>
+  </div>
+</div>

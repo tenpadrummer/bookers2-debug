@@ -26,8 +26,12 @@ Rails.application.routes.draw do
     member do
       get "join", to: "groups#join"
       delete "leave", to: "groups#leave"
+      get "new/mail", to: "groups#new_mail"
+      post "mail", to: "groups#create_mail"
     end
   end
 
   get 'search' => "searches#search"
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

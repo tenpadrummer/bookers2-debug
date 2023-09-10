@@ -50,6 +50,22 @@ class GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+  def new_mail
+    @group = Group.find(params[:id])
+  end
+
+  def create_mail
+    @group = Group.find(params[:id])
+    @group_users = @group.users
+    @title = params[:title]
+    @content = params[:content]
+    if @title.present? && @content.present?
+     #GroupMailer.send_notification(@group_users, @title, @content).deliver_now
+    else
+      render :new_mail
+    end
+  end
+
   private
 
   def group_params
