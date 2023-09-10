@@ -24,6 +24,13 @@
           <%= book.favorites.count %>
         </td>
         <td>
+          <% if request.path.include?("user") %>
+            <%= render "books/star", book: book %>
+          <% else %>
+            <%= render "star", book: book %>
+          <% end %>
+        </td>
+        <td>
           コメント数: <%= book.book_comments.count %>
         </td>
         <td>
