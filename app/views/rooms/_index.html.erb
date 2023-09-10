@@ -1,0 +1,16 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Join User</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% rooms.each do |room| %>
+      <tr>
+        <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>

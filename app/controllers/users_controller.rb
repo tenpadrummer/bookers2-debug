@@ -5,6 +5,22 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+    @current_room_users = RoomUser.where(user_id: current_user.id)
+    @another_room_users = RoomUser.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @current_room_users.each do |current_room_user|
+        @another_room_users.each do |another_room_user|
+          if current_room_user.room_id == another_room_user.room_id
+            @is_room = true
+            @room_id = current_room_user.room_id
+          end
+        end
+      end
+      unless @is_room
+        @room = Room.new
+        @room_user = RoomUser.new
+      end
+    end
   end
 
   def index
