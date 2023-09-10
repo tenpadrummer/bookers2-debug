@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+  <div class='container mt-5'>
+  	<div class='row'>
+    	<div class="text-center container mx-auto mt-3 mb-3">
+        <%= form_with url: search_path, method: :get, local: true do |f| %>
+          <%= f.text_field :keyword %>
+            <%= f.select :model_label, options_for_select(model_labels.map{|c|[c[:name], c[:id]]}), {} %>
+            <%= f.select :match_label, options_for_select(match_labels.map{|c|[c[:name], c[:id]]}), {} %>
+          <%= f.submit "検索" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

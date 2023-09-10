@@ -1,6 +1,6 @@
 <div class='container'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto text-center">
       <h2>Log in</h2>
       <%= form_with model: @user, url: session_path(resource_name), local: true do |f| %>
         <div class="field">
@@ -17,7 +17,7 @@
             <%= f.label :remember_me %>
           </div>
         <% end -%>
-        <div class="actions">
+        <div class="actions my-3">
           <%= f.submit "Log in" ,class: 'btn btn-sm btn-primary'%>
         </div>
       <% end %>

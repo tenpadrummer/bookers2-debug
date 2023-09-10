@@ -1,5 +1,7 @@
 <table class='table'>
-  <tr><%= image_tag user.get_profile_image, size:'100x100' %></tr>
+  <tr>
+    <%= image_tag user.get_profile_image, size:'100x100', class: "my-2" %>
+  </tr>
   <tr>
 	  <th>name</th>
 	  <th><%= user.name %></th>
@@ -24,23 +26,28 @@
 	    <% end %>
     </th>
   </tr>
+  <tr>
+    <th colspan="2">
+      <% unless current_user == user %>
+        <% if current_user.following?(user) %>
+          <%= form_for current_user.active_relationships.find_by(followed_id: user.id), html: {method: :delete } do |f| %>
+            <%= f.submit "フォローを止める", class: "btn btn-outline-danger btn-block" %>
+          <% end %>
+        <% else %>
+          <%= form_for current_user.active_relationships.build do |f| %>
+            <%= hidden_field_tag :followed_id, user.id %>
+            <%= f.submit "フォローする", class: "btn btn-outline-primary btn-block" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </th>
+  </tr>
 </table>
 <div class='row'>
-  <% unless current_user == user %>
-    <% if current_user.following?(user) %>
-      <%= form_for current_user.active_relationships.find_by(followed_id: user.id), html: {method: :delete } do |f| %>
-        <%= f.submit "フォローを止める", class: "btn btn-danger" %>
-      <% end %>
-    <% else %>
-      <%= form_for current_user.active_relationships.build do |f| %>
-        <%= hidden_field_tag :followed_id, user.id %>
-        <%= f.submit "フォローする", class: "btn btn-primary" %>
-      <% end %>
-    <% end %>
-  <% end %>
+
 </div>
 <div class='row'>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
-    <i class="fas fa-user-cog"></i>
+    <i class="fas fa-user-cog mr-1"></i>Setting
   <% end %>
 </div>
