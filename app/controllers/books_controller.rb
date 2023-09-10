@@ -5,6 +5,25 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @new_book = Book.new
     @book_comment = @book.book_comments.new
+    unless ViewCount.find_by(user_id: current_user.id, book_id: @book.id)
+      current_user.view_counts.create(book_id: @book.id)
+    end
+    @current_room_users = RoomUser.where(user_id: current_user.id)
+    @another_room_users = RoomUser.where(user_id: @book.user.id)
+    unless @book.user.id == current_user.id
+      @current_room_users.each do |current_room_user|
+        @another_room_users.each do |another_room_user|
+          if current_room_user.room_id == another_room_user.room_id
+            @is_room = true
+            @room_id = current_room_user.room_id
+          end
+        end
+      end
+      unless @is_room
+        @room = Room.new
+        @room_user = RoomUser.new
+      end
+    end
   end
 
   def index

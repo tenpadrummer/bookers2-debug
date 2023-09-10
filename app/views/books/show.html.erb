@@ -43,6 +43,9 @@
               </td>
             <% end %>
           <% end %>
+          <td>
+            閲覧数: <%= @book.view_counts.count %>
+          </td>
         </tr>
       </table>
       <% if @book.book_comments.present? %>
@@ -59,6 +62,7 @@
                   <%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-danger" %>
                 <% end %>
               </td>
+
             <% end %>
           </tbody>
         </table>
