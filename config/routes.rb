@@ -22,5 +22,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
+  resources :groups, only: [:index,:show,:new,:create,:edit,:update]
+
   get 'search' => "searches#search"
 end
