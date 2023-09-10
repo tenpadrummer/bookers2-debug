@@ -8,6 +8,10 @@ class Book < ApplicationRecord
   validates :title, presence:true
   validates :body,  presence:true, length:{maximum:200}
 
+  scope :latest, -> {order(created_at: :desc)}
+  scope :oldest, -> {order(created_at: :asc)}
+  scope :star_count, -> {order(star: :desc)}
+
   # 投稿の検索
   def self.search(keyword, match_label)
     case match_label

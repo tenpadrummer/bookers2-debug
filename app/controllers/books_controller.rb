@@ -27,7 +27,15 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.includes(:favorites).sort_by { |book| -book.favorites.count }
+    if params[:latest]
+      @books = Book.includes(:favorites).latest
+    elsif params[:oldest]
+      @books = Book.includes(:favorites).oldest
+    elsif params[:star_count]
+      @books = Book.includes(:favorites).star_count
+    else
+      @books = Book.includes(:favorites)
+    end
     @book = Book.new
   end
 
