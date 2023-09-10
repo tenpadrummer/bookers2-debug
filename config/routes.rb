@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :book_comments, only: [:create, :destroy]
     collection do
       get "search", to: "books#search"
+      get 'tag_search', to: 'tags#search'
     end
   end
   resources :users, only: [:index,:show,:edit,:update] do

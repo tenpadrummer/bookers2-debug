@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @new_book = Book.new
     @room = Room.find(params[:id])
     @messages = @room.messages
     @message = Message.new
