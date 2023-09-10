@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  GUEST_USER_EMAIL = "guest@example.com"
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -67,5 +69,17 @@ class User < ApplicationRecord
     else
       User.all
     end
+  end
+
+  # ゲストユーザーのログイン処理
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
+  
+  def guest_user?
+    email == GUEST_USER_EMAIL
   end
 end

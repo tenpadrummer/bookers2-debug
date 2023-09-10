@@ -16,13 +16,15 @@
           </td>
           <td><%= link_to @group.name, @group %></td>
           <td><%= @group.introduction %></td>
-          <% if @group.owner_id == current_user.id %>
-            <td><%= link_to 'Edit',edit_group_path(@group.id), class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to 'Notice an Event', new_mail_group_path(@group), class: "btn btn-sm btn-primary" %></td>
-          <% elsif @group.users.include?(current_user) %>
-            <td> <%= link_to 'Leave this group', leave_group_path(@group) ,method: :delete, class: "btn btn-sm btn-danger" %></td>
-          <% else %>
-            <td><%= link_to 'Join this group', join_group_path(@group), class: "btn btn-sm btn-success" %></td>
+          <% if current_user.email != "guest@example.com" %>
+            <% if @group.owner_id == current_user.id %>
+              <td><%= link_to 'Edit',edit_group_path(@group.id), class: "btn btn-sm btn-success" %></td>
+              <td><%= link_to 'Notice an Event', new_mail_group_path(@group), class: "btn btn-sm btn-primary" %></td>
+            <% elsif @group.users.include?(current_user) %>
+              <td> <%= link_to 'Leave this group', leave_group_path(@group) ,method: :delete, class: "btn btn-sm btn-danger" %></td>
+            <% else %>
+              <td><%= link_to 'Join this group', join_group_path(@group), class: "btn btn-sm btn-success" %></td>
+            <% end %>
           <% end %>
         </tr>
       </table>
