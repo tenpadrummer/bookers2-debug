@@ -93,6 +93,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         fill_in 'book[title]', with: Faker::Lorem.characters(number: 5)
         fill_in 'book[body]', with: Faker::Lorem.characters(number: 20)
+        fill_in 'book[category]', with: Faker::Lorem.characters(number: 5)
       end
 
       it '自分の新しい投稿が正しく保存される' do
@@ -166,6 +167,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         fill_in 'book[title]', with: Faker::Lorem.characters(number: 5)
         fill_in 'book[body]', with: Faker::Lorem.characters(number: 20)
+        fill_in 'book[category]', with: Faker::Lorem.characters(number: 5)
       end
 
       it '自分の新しい投稿が正しく保存される' do

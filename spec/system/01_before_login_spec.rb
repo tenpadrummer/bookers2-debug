@@ -11,19 +11,19 @@ describe '[STEP1] ユーザログイン前のテスト' do
         expect(current_path).to eq '/'
       end
       it 'Log inリンクが表示される: 青色のボタンの表示が「Log in」である' do
-        log_in_link = find_all('a')[5].native.inner_text
+        log_in_link = find_all('a')[6].native.inner_text
         expect(log_in_link).to match(/Log in/)
       end
       it 'Log inリンクの内容が正しい' do
-        log_in_link = find_all('a')[5].native.inner_text
+        log_in_link = find_all('a')[6].native.inner_text
         expect(page).to have_link log_in_link, href: new_user_session_path
       end
       it 'Sign upリンクが表示される: 緑色のボタンの表示が「Sign up」である' do
-        sign_up_link = find_all('a')[6].native.inner_text
+        sign_up_link = find_all('a')[7].native.inner_text
         expect(sign_up_link).to match(/Sign up/)
       end
       it 'Sign upリンクの内容が正しい' do
-        sign_up_link = find_all('a')[6].native.inner_text
+        sign_up_link = find_all('a')[7].native.inner_text
         expect(page).to have_link sign_up_link, href: new_user_registration_path
       end
     end
@@ -71,7 +71,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
     context 'リンクの内容を確認' do
       subject { current_path }
-      
+
       it 'Bookersを押すと、トップ画面に遷移する' do
         home_link = find_all('a')[0].native.inner_text
         home_link = home_link.delete(' ')

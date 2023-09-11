@@ -11,12 +11,14 @@
   		<table class='table'>
   		  <tr>
           <td>
-            <%= link_to user_path(@book.user_id) do %>
+            <%= link_to @book.user do %>
               <%= image_tag @book.user.get_profile_image, size:"100x100" %><br>
             <% end %>
           </td>
           <td>
-            <%= @book.user.name %>
+            <%= link_to @book.user do %>
+              <%= @book.user.name %>
+            <% end %>
           </td>
           <td>
             <%= link_to @book.title, book_path(@book.id) %>
@@ -54,11 +56,11 @@
       <% if @book.book_comments.present? %>
         <table>
           <tbody>
-            <% @book.book_comments.each do |book_comment| %>
+            <%= @book.book_comments.each do |book_comment| %>
               <td>
                 <%= link_to book_comment.user do %>
-                  <%#= image_tag book_comment.user.get_profile_image, size:"50x50" %>
-                  <%#= book_comment.user.name %>
+                  <%= image_tag book_comment.user.get_profile_image,size:"50x50" %>
+                  <%= book_comment.user.name %>
                 <% end %>
                 <%= book_comment.comment %>
                 <% if book_comment.user_id == current_user.id %>

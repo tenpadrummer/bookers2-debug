@@ -52,6 +52,7 @@ describe '[STEP3] 仕上げのテスト' do
       visit books_path
       fill_in 'book[title]', with: Faker::Lorem.characters(number: 5)
       fill_in 'book[body]', with: Faker::Lorem.characters(number: 20)
+      fill_in 'book[category]', with: Faker::Lorem.characters(number: 5)
       click_button 'Create Book'
       is_expected.to have_content 'successfully'
     end
